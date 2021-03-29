@@ -24,4 +24,4 @@ function selectionSort(array) {
   return array;
 }
 
-console.log(selectionSort([9, 15, 2, 44, -1, 36, 1]));
+console.log(selectionSort(Array.from(Array(100)).map(x=>Math.floor(Math.random() * 100))));
