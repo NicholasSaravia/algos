@@ -1,40 +1,34 @@
-// Merge Sort Implentation (Recursion)
-function mergeSort(unsortedArray) {
-  // No need to sort the array if the array only has one element or empty
-  if (unsortedArray.length <= 1) {
-    return unsortedArray;
-  }
-  // In order to divide the array in half, we need to figure out the middle
-  const middle = Math.floor(unsortedArray.length / 2);
+// recursion method
+function mergeSort(array) {
+  // we do not need to continue the 
+  if (array.length === 1) return array;
 
-  // This is where we will be dividing the array into left and right
-  const left = unsortedArray.slice(0, middle);
-  const right = unsortedArray.slice(middle);
+  const middle = Math.floor(array.length / 2);
+  
+  let left = array.slice(0, middle);
+  let right = array.slice(middle);
 
-  // Using recursion to combine the left and right
+
   return merge(mergeSort(left), mergeSort(right));
 }
 
-// Merge the two arrays: left and right
-function merge (left, right) {
-  let resultArray = [], leftIndex = 0, rightIndex = 0;
+// merge arrays together
+function merge(left, right) {
+  let merged = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
 
-  // loop until left and right have been itterated through
-  while (leftIndex < left.length && rightIndex < right.length) {
-    if (left[leftIndex] < right[rightIndex]) {
-      resultArray.push(left[leftIndex]);
-      leftIndex++; // move left array cursor
-    } else {
-      resultArray.push(right[rightIndex]);
-      rightIndex++; // move right array cursor
+  while(leftIndex < left.length && rightIndex < right.length){
+    if (left[leftIndex] < right[rightIndex]){
+      merged.push(left[leftIndex]);
+      leftIndex++;
+    }else{
+      merged.push(right[rightIndex]);
+      rightIndex++;
     }
   }
 
-  // We need to concat here because there will be one element remaining
-  // from either left OR the right
-  return resultArray
-          .concat(left.slice(leftIndex))
-          .concat(right.slice(rightIndex));
+  return [...merged, ...left.slice(leftIndex), ...right.slice(rightIndex)];
 }
 
-console.log(mergeSort([1, 44, 6, 84, 7, 5]));
+console.log(mergeSort([1, 44, 6, 23, 68, -1, 3, 4343, 545, 134, 84, 7, 5]));
